@@ -9,25 +9,24 @@ import datetime
 class Interface:
 
     def __init__(self, master):
-        # cette partie permet de créer les différent éléments de l'interface et d'y ajouter leurs dimensions
         self.master = master
         master.title("Conversion interface")
 
         NamePython = __file__
         
-        # Variables pour stocker les chemins et noms de fichier
+        # Variables for storing paths and file names
         self.file_path = tk.StringVar()
         self.file_name = tk.StringVar()
         self.file_new_file_name = tk.StringVar()
 
-        #Les carrés
+
+        # Interface elements
         self.radio_frame = tk.Frame(self.master, bd=2, relief="solid")
         self.radio_frame.grid(row=4, column=1, columnspan=2, padx=10, pady=10)
         self.radio_frame2 = tk.Frame(self.master, bd=2, relief="solid")
         self.radio_frame2.grid(row=5, column=1, columnspan=2, padx=10, pady=10)
 
 
-        # Éléments de l'interface
         tk.Label(master, text="Browse of the file :", font=("Arial", 12)).grid(row=0, column=0)
         self.path_entry = tk.Entry(master, textvariable=self.file_path, width=40)
         self.path_entry.grid(row=0, column=1, sticky="W", padx=5)
@@ -35,7 +34,6 @@ class Interface:
         tk.Label(master, text="Name of the new file :", font=("Arial", 12)).grid(row=1, column=0)
         self.name_entry = tk.Entry(master, textvariable=self.file_new_file_name, width=40)
         self.name_entry.grid(row=1, column=1)
-        # ici il faut rajouter un '.txt' après que le nom soit donné
 
         self.radio_var = tk.IntVar()
         self.radio_var.set(1)
@@ -71,17 +69,14 @@ class Interface:
      
 
     def toggle_radio(self, radio_num):
-        # si on clique sur le troisième radio bouton, on coche le cinquième et on décoche le sixième
         if radio_num == 3:
             self.var6.set("Radio 6")
             self.var5.set("None")
             self.var4.set("None")
-        # si on clique sur le quatrième radio bouton, on coche le sixième et on décoche le cinquième
         elif radio_num == 4:
             self.var5.set("Radio 5")
             self.var6.set("None")
             self.var3.set("None")
-        # si on clique sur un autre radio bouton, on décoche les radios boutons 5 et 6
         elif radio_num == 5:
             self.var4.set("Radio 4")
             self.var6.set("None")
@@ -93,7 +88,7 @@ class Interface:
 
 
     def browse_file(self):
-        # Ouvre une fenêtre pour parcourir les fichiers
+        # Opens a window to browse files
         file_path = filedialog.askopenfilename()
         if file_path:
             self.file_path.set(file_path)
@@ -106,12 +101,8 @@ class Interface:
 
 
     def convert_file(self):
-        # Appelle le programme C avec les informations de l'interface
-        #path = self.file_path.get()
         name = self.file_name.get()
-        # option = self.radio_var.get()
         sortie = self.file_new_file_name.get()
-       
         bouton1 = self.radio_var.get()
         bouton2 = self.var3.get()   
         
@@ -124,7 +115,7 @@ class Interface:
         bouton2=str(bouton2)
         print(f"bouton 1 : {bouton1}")
         print(f"bouton 2 : {bouton2}")
-        # Appel au programme C
+        # Call the C program
         print(f"argv 0 : {name}")
         commande = ['./ToolTOLv1.exe', name, sortie, bouton1, bouton2]
         result = subprocess.run(commande, capture_output=True)
@@ -139,16 +130,6 @@ class Interface:
         print(f"stderr: {result.stderr.decode()}")
        
         
-        #print(process.stdout.decode('utf-8'))
-        #print(process.stderr.decode('utf-8'))
-
-
-        
-       # cette ligne est un exemple de code je ne pense pas en avoir besoin ultérieurement subprocess.call(["./convert", path, name, str(option)])
-       # print (f"Les arguments de argv sont : {argv}");
-       # print (f"Le nombre d'argument contenu dans argc est : {argc}");
-       # print (f"Les différentes option choisis sont : {option}");
-
 
 
 root = tk.Tk()
