@@ -146,7 +146,7 @@ class Interface:
         print(f"bouton 2 : {bouton2}")
         # Call the C program
         print(f"argv 0 : {name}")
-        commande = ['./ToolTOLv1.exe', name, sortie, bouton1, bouton2]
+        commande = ['./ToolTOFv1.exe', name, sortie, bouton1, bouton2]
         result = subprocess.run(commande, capture_output=True)
         print("-----------------------------------------------------")
         if result.returncode == 0:
