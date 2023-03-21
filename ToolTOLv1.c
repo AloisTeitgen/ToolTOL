@@ -706,4 +706,3 @@ short int count_adcs(uint16_t word)
 
     return counter;
 }
-
